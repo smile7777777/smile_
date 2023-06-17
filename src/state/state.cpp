@@ -12,6 +12,35 @@
  * @return int 
  */
 int State::evaluate(){
+  if(player == 0)
+  for(int i = 0; i < 6; i++)
+    for(int j = 0; j < 5; j++)
+      switch (Board::board[0][i][j])
+      { 
+      case 0:
+          return 0;
+        break;
+      case 1: 
+          return 2;
+        break;
+      case 2:
+          return 6;
+        break;
+      case 3:
+          return 7;
+        break;
+      case 4:
+          return 8;
+        break;
+      case 5:
+          return 20;
+        break;
+      case 6:
+          return 1e9;
+        break;
+      default:
+        break;
+      }
   // [TODO] design your own evaluation function
   return 0;
 }
