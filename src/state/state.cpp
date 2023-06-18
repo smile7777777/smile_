@@ -15,7 +15,7 @@ int State::evaluate(){
   if(player == 0)
   for(int i = 0; i < 6; i++)
     for(int j = 0; j < 5; j++)
-      switch (Board::board[0][i][j])
+      switch (this->board.board[0][i][j])
       { 
       case 0:
           return 0;
