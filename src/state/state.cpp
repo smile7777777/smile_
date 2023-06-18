@@ -12,37 +12,64 @@
  * @return int 
  */
 int State::evaluate(){
-  if(player == 0)
-  for(int i = 0; i < 6; i++)
-    for(int j = 0; j < 5; j++)
-      switch (this->board.board[0][i][j])
-      { 
+  int enemy = 0;
+  int self = 0;
+
+    for(int i = 0; i < 6; i++){
+      for(int j = 0; j < 5; j++){
+        switch (this->board.board[0][i][j]){
       case 0:
-          return 0;
+          self += 2;
         break;
       case 1: 
-          return 2;
+          self += 6;
         break;
       case 2:
-          return 6;
+          self += 7;
         break;
       case 3:
-          return 7;
+          self += 8;
         break;
       case 4:
-          return 8;
+          self += 20;
         break;
       case 5:
-          return 20;
-        break;
-      case 6:
-          return 1e9;
+          self += 1e9;
         break;
       default:
         break;
-      }
+        }
+          }  
+            }
+
+      for(int i = 0; i < 6; i++)
+    for(int j = 0; j < 5; j++)
+      switch (this->board.board[1][i][j]){
+      case 0:
+          enemy += 2;
+        break;
+      case 1: 
+          enemy += 6;
+        break;
+      case 2:
+          enemy += 7;
+        break;
+      case 3:
+          enemy += 8;
+        break;
+      case 4:
+          enemy += 20;
+        break;
+      case 5:
+          enemy += 1e9;
+        break;
+      default:
+        break;
+        }
+
   // [TODO] design your own evaluation function
-  return 0;
+      if(player == 0)return self - enemy;
+      else if(player == 1) return enemy - self;
 }
 
 
