@@ -13,6 +13,25 @@ typedef std::pair<size_t, size_t> Point;
 typedef std::pair<Point, Point> Move;
 class Board{
   public:
+
+   /* int Pawn_Values[2][6][5] = {{
+      //white
+    { 10,  10,  10,  10,  10 },
+    { 5,  5,  5,  5,  5 },
+    { 3,  2,  2,  2,  3 },
+    { 2,  2,  2,  2,  2 },
+    { 0,  0,  0,  0,  0 },
+    { 0,  0,  0,  0,  0 },},{
+      //black
+    { 0,  0,  0,  0,  0 },
+    { 0,  0,  0,  0,  0 },
+    { 2,  2,  2,  2,  2 },
+    { 3,  2,  2,  2,  3 },
+    { 5,  5,  5,  5,  5 },
+    { 10,  10,  10,  10,  10 }
+    }
+  };  */ 
+
     char board[2][BOARD_H][BOARD_W] = {{
       //white
       {0, 0, 0, 0, 0},
@@ -53,7 +72,8 @@ class State{
     State(Board board): board(board){};
     State(Board board, int player): board(board), player(player){};
     
-    int evaluate();
+    int evaluate1();
+    int evaluate2();
     State* next_state(Move move);
     void get_legal_actions();
     std::string encode_output();

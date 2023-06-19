@@ -11,65 +11,126 @@
  * 
  * @return int 
  */
-int State::evaluate(){
+int State::evaluate1(){
   int enemy = 0;
   int self = 0;
+  this->player = 0;
+  auto self_board = this->board.board[this->player];
+  auto oppn_board = this->board.board[1 - this->player];
 
     for(int i = 0; i < 6; i++){
       for(int j = 0; j < 5; j++){
-        switch (this->board.board[0][i][j]){
-      case 0:
-          self += 2;
+        //std::cout << this->board.board[0][2][3] << ' ';
+        switch (self_board[i][j]){
+      case 1:
+          self += 200; //* self_pawn[i][j];
         break;
-      case 1: 
-          self += 6;
-        break;
-      case 2:
-          self += 7;
+      case 2: 
+          self += 600;
         break;
       case 3:
-          self += 8;
+          self += 700;
         break;
       case 4:
-          self += 20;
+          self += 800;
         break;
       case 5:
+          self += 2000;
+        break;
+      case 6:
           self += 1e9;
         break;
-      default:
-        break;
         }
-          }  
-            }
-
-      for(int i = 0; i < 6; i++)
-    for(int j = 0; j < 5; j++)
-      switch (this->board.board[1][i][j]){
-      case 0:
-          enemy += 2;
+        switch (oppn_board[i][j]){
+      case 1:
+          enemy += 200;
         break;
-      case 1: 
-          enemy += 6;
-        break;
-      case 2:
-          enemy += 7;
+      case 2: 
+          enemy += 600;
         break;
       case 3:
-          enemy += 8;
+          enemy += 700;
         break;
       case 4:
-          enemy += 20;
+          enemy += 800;
         break;
       case 5:
+          enemy += 2000;
+        break;
+      case 6:
           enemy += 1e9;
         break;
-      default:
+        }
+      }
+    }  
+      //return self - enemy;
+      
+      //if()
+      if(!this->player) return self - enemy;
+      else return enemy - self;
+
+      //else
+      if(this->player) return self - enemy;
+      else return enemy - self;
+}
+
+int State::evaluate2(){
+  int enemy = 0;
+  int self = 0;
+  auto self_board = this->board.board[this->player];
+  auto oppn_board = this->board.board[1 - this->player];
+ // auto self_pawn = this->board.Pawn_Values[this->player];
+  //auto oppn_pawn = this->board.Pawn_Values[1 - this->player];  
+    //std::cout << this->board.board[0][2][3] << ' ';
+
+    for(int i = 0; i < 6; i++){
+      for(int j = 0; j < 5; j++){
+        //std::cout << this->board.board[0][2][3] << ' ';
+        switch (self_board[i][j]){
+      case 1:
+          self += 200; //* self_pawn[i][j];
+        break;
+      case 2: 
+          self += 600;
+        break;
+      case 3:
+          self += 700;
+        break;
+      case 4:
+          self += 800;
+        break;
+      case 5:
+          self += 2000;
+        break;
+      case 6:
+          self += 1e9;
         break;
         }
-
-  // [TODO] design your own evaluation function
-      if(player == 0)return self - enemy;
-      else if(player == 1) return enemy - self;
+        switch (oppn_board[i][j]){
+      case 1:
+          enemy += 200;
+        break;
+      case 2: 
+          enemy += 600;
+        break;
+      case 3:
+          enemy += 700;
+        break;
+      case 4:
+          enemy += 800;
+        break;
+      case 5:
+          enemy += 2000;
+        break;
+      case 6:
+          enemy += 1e9;
+        break;
+        }
+      }
+    }  
+      
+      if(this->player) return self - enemy;
+      else return enemy - self;
 }
 
 
