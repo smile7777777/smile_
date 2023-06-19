@@ -38,15 +38,18 @@ void read_board(std::ifstream& fin) {
  * 
  * @param fout 
  */
+
 void write_valid_spot(std::ofstream& fout) {
   // Keep updating the output until getting killed.
   while(true) {
     // Choose a random spot.
-    auto move = AlphaBeta::get_move(root, 4, !root->player);
+    int detph = 5;
+      while(true){
+    auto move = AlphaBeta::get_move(root, detph, !root->player);
     fout << move.first.first << " " << move.first.second << " "\
          << move.second.first << " " << move.second.second << std::endl;
-    
     // Remember to flush the output to ensure the last action is written to file.
+      }
     fout.flush();
     break;
   }
