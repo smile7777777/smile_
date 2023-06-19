@@ -26,7 +26,9 @@ int State::evaluate1(){
   auto self_knight = this->board.knight_Values[this->player];
   auto oppn_knight = this->board.knight_Values[1 - this->player];
   auto self_bishop = this->board.bishop_Values[this->player];
-  auto oppn_bishop = this->board.bishop_Values[1 - this->player];  
+  auto oppn_bishop = this->board.bishop_Values[1 - this->player];
+  auto self_rook = this->board.rook_Values[this->player];
+  auto oppn_rook = this->board.rook_Values[1 - this->player];  
     for(int i = 0; i < 6; i++){
       for(int j = 0; j < 5; j++){
         //std::cout << this->board.board[0][2][3] << ' ';
@@ -35,7 +37,7 @@ int State::evaluate1(){
           self += 200 * self_pawn[i][j];
         break;
       case 2: 
-          self += 600;
+          self += 400 + self_rook[i][j];
         break;
       case 3:
           self += 700 + self_knight[i][j];
@@ -55,7 +57,7 @@ int State::evaluate1(){
           enemy += 200 * oppn_pawn[i][j];
         break;
       case 2: 
-          enemy += 600;
+          enemy += 400 + oppn_rook[i][j];
         break;
       case 3:
           enemy += 700 + oppn_knight[i][j];
@@ -138,7 +140,7 @@ int State::evaluate2(){
       }
     }  
       
-      if(this->player) return self - enemy;
+      if(!this->player) return self - enemy;
       else return enemy - self;
 }
 
@@ -333,7 +335,7 @@ void State::get_legal_actions(){
       }
     }
   }
-  std::cout << "\n";
+  //std::cout << "\n";
   this->legal_actions = all_actions;
 }
 
