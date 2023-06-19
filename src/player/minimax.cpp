@@ -3,7 +3,7 @@
 
 #include "../config.hpp"
 #include "../state/state.hpp"
-#include "../policy/random.hpp"
+#include "../policy/minimax.hpp"
 
 
 State* root;
@@ -28,6 +28,8 @@ void read_board(std::ifstream& fin) {
       // std::cout << std::endl;
     }
   }
+  //Minimax::role = player;
+  //Minimax::change_role(player);
   root = new State(board, player);
   root->get_legal_actions();
 }
@@ -42,7 +44,7 @@ void write_valid_spot(std::ofstream& fout) {
   // Keep updating the output until getting killed.
   while(true) {
     // Choose a random spot.
-    auto move = Random::get_move(root, 0);
+    auto move = Minimax::get_move(root, 4, true);
     fout << move.first.first << " " << move.first.second << " "\
          << move.second.first << " " << move.second.second << std::endl;
     

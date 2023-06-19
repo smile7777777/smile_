@@ -52,15 +52,20 @@ Move Minimax::get_move(State *state, int depth, bool minimaxplayer){
 }
 
 int Minimax::minimax(State *state, int depth, bool minimaxplayer){
-  if(depth == 0 || state->game_state == WIN)
-    return state->evaluate();
+  //if((depth == 0 || !state->legal_actions.size()) && minimaxplayer)
+    //return state->evaluate1();
+  //if((depth == 0 || !state->legal_actions.size()) && !minimaxplayer)
+    //return state->evaluate2();
+    //role = Minimax::role;
+    if((depth == 0 || !state->legal_actions.size()))
+      return state->evaluate1();
   
-  if(minimaxplayer == 1){
+  if(minimaxplayer){
     int value = -1e9;
     
     for(Move next : state->legal_actions){
       State *child = state->next_state(next);
-      value = max(value,minimax(child, depth - 1, false));
+      value = std::max(value,minimax(child, depth - 1, false));
       delete child;
     }
       return value;
@@ -69,7 +74,7 @@ int Minimax::minimax(State *state, int depth, bool minimaxplayer){
 
     for(Move next : state->legal_actions){
       State* child = state->next_state(next);
-      value = min(value,minimax(child, depth - 1, true));
+      value = std::min(value,minimax(child, depth - 1, true));
       delete child;
     }
       return value;
