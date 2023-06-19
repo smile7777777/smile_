@@ -17,48 +17,57 @@ int State::evaluate1(){
   this->player = 0;
   auto self_board = this->board.board[this->player];
   auto oppn_board = this->board.board[1 - this->player];
-
+  auto self_pawn = this->board.Pawn_Values[this->player];
+  auto oppn_pawn = this->board.Pawn_Values[1 - this->player];
+  auto self_queen = this->board.queen_Values[this->player];
+  auto oppn_queen = this->board.queen_Values[1 - this->player];
+  auto self_king = this->board.king_Values[this->player];
+  auto oppn_king = this->board.king_Values[1 - this->player]; 
+  auto self_knight = this->board.knight_Values[this->player];
+  auto oppn_knight = this->board.knight_Values[1 - this->player];
+  auto self_bishop = this->board.bishop_Values[this->player];
+  auto oppn_bishop = this->board.bishop_Values[1 - this->player];  
     for(int i = 0; i < 6; i++){
       for(int j = 0; j < 5; j++){
         //std::cout << this->board.board[0][2][3] << ' ';
         switch (self_board[i][j]){
       case 1:
-          self += 200; //* self_pawn[i][j];
+          self += 200 * self_pawn[i][j];
         break;
       case 2: 
           self += 600;
         break;
       case 3:
-          self += 700;
+          self += 700 + self_knight[i][j];
         break;
       case 4:
-          self += 800;
+          self += 800 * self_bishop[i][j];
         break;
       case 5:
-          self += 2000;
+          self += 2000 + self_queen[i][j];
         break;
       case 6:
-          self += 1e9;
+          self += 1e9 - self_king[i][j];
         break;
         }
         switch (oppn_board[i][j]){
       case 1:
-          enemy += 200;
+          enemy += 200 * oppn_pawn[i][j];
         break;
       case 2: 
           enemy += 600;
         break;
       case 3:
-          enemy += 700;
+          enemy += 700 + oppn_knight[i][j];
         break;
       case 4:
-          enemy += 800;
+          enemy += 800 * oppn_bishop[i][j];
         break;
       case 5:
-          enemy += 2000;
+          enemy += 2000 + oppn_queen[i][j];
         break;
       case 6:
-          enemy += 1e9;
+          enemy += 1e9 - oppn_king[i][j];
         break;
         }
       }
@@ -70,8 +79,8 @@ int State::evaluate1(){
       else return enemy - self;
 
       //else
-      if(this->player) return self - enemy;
-      else return enemy - self;
+      //if(this->player) return self - enemy;
+      //else return enemy - self;
 }
 
 int State::evaluate2(){
