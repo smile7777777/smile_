@@ -43,7 +43,7 @@ void write_valid_spot(std::ofstream& fout) {
   // Keep updating the output until getting killed.
   while(true) {
     // Choose a random spot.
-    int detph = 5;
+    int detph = 4;
       while(true){
     auto move = AlphaBeta::get_move(root, detph, !root->player);
     fout << move.first.first << " " << move.first.second << " "\
