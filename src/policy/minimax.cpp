@@ -58,7 +58,7 @@ int Minimax::minimax(State *state, int depth, bool minimaxplayer){
     //return state->evaluate2();
     //role = Minimax::role;
     if((depth == 0 || !state->legal_actions.size()))
-      return state->evaluate2();
+      return state->evaluate1();
   
   if(minimaxplayer){
     int value = -1e9;
