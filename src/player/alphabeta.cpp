@@ -48,6 +48,7 @@ void write_valid_spot(std::ofstream& fout) {
     auto move = AlphaBeta::get_move(root, detph, !root->player);
     fout << move.first.first << " " << move.first.second << " "\
          << move.second.first << " " << move.second.second << std::endl;
+         detph++;
     // Remember to flush the output to ensure the last action is written to file.
       }
     fout.flush();
