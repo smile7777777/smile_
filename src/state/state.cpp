@@ -37,7 +37,7 @@ int State::evaluate1(){
           self += 200 * self_pawn[i][j];
         break;
       case 2: 
-          self += 400 + self_rook[i][j];
+          self += 800 + self_rook[i][j];
         break;
       case 3:
           self += 700 + self_knight[i][j];
@@ -57,7 +57,7 @@ int State::evaluate1(){
           enemy += 200 * oppn_pawn[i][j];
         break;
       case 2: 
-          enemy += 400 + oppn_rook[i][j];
+          enemy += 800 + oppn_rook[i][j];
         break;
       case 3:
           enemy += 700 + oppn_knight[i][j];
